@@ -16,7 +16,10 @@ namespace SmartHotel.Application.Mapper
             CreateMap<BookingDto, Booking>()
                 .ForMember(m => m.Id, opt => opt.Ignore())
                 .ForMember(m => m.GuestId, opt => opt.MapFrom(x => x.GuestId))
-                .ForMember(m => m.RoomId, opt => opt.MapFrom(x => x.RoomId));
+                .ForMember(m => m.RoomId, opt => opt.MapFrom(x => x.RoomId))
+                .ForMember(m => m.CheckIn, opt => opt.MapFrom(x => x.CheckIn))
+                .ForMember(m => m.CheckOut, opt => opt.MapFrom(x => x.CheckOut))
+                .ForMember(m => m.Value, opt => opt.MapFrom(x => x.Value));
         }
     }
 }
