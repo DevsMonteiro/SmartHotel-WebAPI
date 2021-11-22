@@ -62,7 +62,6 @@ namespace SmartHotel_WebAPI.Controllers
 
                 _applicationServiceGuest.Update(guestDTO);
                 return Ok(guestDTO);
-                //return Ok("Guest Updated Successfully!");
             }
             catch (Exception ex)
             {

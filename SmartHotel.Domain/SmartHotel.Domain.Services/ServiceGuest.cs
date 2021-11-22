@@ -21,9 +21,9 @@ namespace SmartHotel.Domain.Servicies
             return guests.Where(g => g.HasPending(g));
         }
 
-        public Guest GetGuestByCpf(string cpf)
+        public Guest GuestSearchByCpf(string cpf)
         {
-            return _repositoryGuest.GetGuestByCpf(cpf);
+            return _repositoryGuest.GuestSearchByCpf(cpf);
         }
     }
 }

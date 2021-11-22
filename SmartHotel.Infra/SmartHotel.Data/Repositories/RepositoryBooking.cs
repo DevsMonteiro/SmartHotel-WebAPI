@@ -2,6 +2,7 @@
 using SmartHotel.Data.Context;
 using SmartHotel.Domain.Entities;
 using SmartHotel.Domain.Interface.IRepositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,14 +27,17 @@ namespace SmartHotel.Data.Repositories
                            .ToList();
         }
 
-        public virtual Booking GetGuestByCpf(string cpf)
+        public IEnumerable<Booking> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut)
         {
+            CheckIn = CheckIn.Date;
+            CheckOut = CheckOut.Date.AddDays(1).AddSeconds(-1);
 
-            return _context.Set<Booking>()
-                           .Include(r => r.Guest)
-                           .SingleOrDefault(x => x.Guest.CPF == cpf);
+            return _context.Booking
+                .Where(d => d.CheckIn >= CheckIn && d.CheckOut <= CheckOut)
+                .Include(g => g.Guest)
+                .Include(r => r.Room)
+                .ThenInclude(rt => rt.RoomType)
+                .ToList();
         }
-
-
     }
 }

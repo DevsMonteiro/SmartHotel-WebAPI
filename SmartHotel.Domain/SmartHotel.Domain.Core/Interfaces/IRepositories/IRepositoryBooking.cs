@@ -1,9 +1,11 @@
 ﻿using SmartHotel.Domain.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace SmartHotel.Domain.Interface.IRepositories
 {
     public interface IRepositoryBooking : IRepositoryBase<Booking>
     {
-        Booking GetGuestByCpf(string cpf);
+        IEnumerable<Booking> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut);
     }
 }

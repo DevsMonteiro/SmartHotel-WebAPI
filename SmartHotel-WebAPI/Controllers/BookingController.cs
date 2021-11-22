@@ -17,36 +17,41 @@ namespace SmartHotel_WebAPI.Controllers
             this._applicationServiceBooking = applicationServiceBooking;
         }
 
-        // GET api/values
+        #region HTTPGET
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetAll()
         {
             return Ok(_applicationServiceBooking.GetAll());
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult GetById(Guid id)
         {
             return Ok(_applicationServiceBooking.GetById(id));
         }
 
-        [HttpGet("ByCpf/{cpf}")]
-        public ActionResult GetGuestByCpf(string cpf)
+        [HttpGet("GetByCpf/{cpf}")]
+        public ActionResult GuestSearchByCpf(string cpf)
         {
-            return Ok(_applicationServiceBooking.GetGuestByCpf(cpf));
+            return Ok(_applicationServiceBooking.GuestSearchByCpf(cpf));
         }
 
-        // POST api/values
+        [HttpGet("ChekDate")]
+        public ActionResult BookingSearchByDateRange(DateTime CheckIn, DateTime Checkout)
+        {
+            return Ok(_applicationServiceBooking.BookingSearchByDateRange(CheckIn, Checkout));
+        }
+        #endregion
+
         [HttpPost]
-        public ActionResult Post([FromBody] BookingDto bookingDto)
+        public ActionResult Post(BookingDto bookingDto)
         {
             try
             {
                 if (bookingDto == null) return NotFound();
 
                 _applicationServiceBooking.Add(bookingDto);
-                return Ok("Successfully Registered Guest!");
+                return Ok(bookingDto);
             }
             catch (Exception ex)
             {

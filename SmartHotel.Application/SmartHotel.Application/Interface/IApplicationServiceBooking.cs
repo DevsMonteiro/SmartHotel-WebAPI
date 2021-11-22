@@ -16,6 +16,8 @@ namespace SmartHotel.Application.Interface
 
         BookingDto GetById(Guid id);
 
-        GuestDto GetGuestByCpf(string cpf);
+        GuestDto GuestSearchByCpf(string cpf);
+
+        IEnumerable<BookingDto> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut);
     }
 }

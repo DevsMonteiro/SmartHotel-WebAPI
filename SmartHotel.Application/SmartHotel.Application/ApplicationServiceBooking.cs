@@ -29,6 +29,7 @@ namespace SmartHotel.Application
 
         public void Add(BookingDto bookingDto)
         {
+
             var booking = mapper.Map<Booking>(bookingDto);
             _serviceBooking.Add(booking);
         }
@@ -55,21 +56,28 @@ namespace SmartHotel.Application
             return bookingDto;
         }
 
-        public GuestDto GetGuestByCpf(string cpf)
+        public void Update(BookingDto bookingDto)
         {
+            var booking = mapper.Map<Booking>(bookingDto);
+            _serviceBooking.Update(booking);
+        }
 
-            //return _serviceGuest.GetGuestByCpf(cpf);
 
-            var booking = _serviceGuest.GetGuestByCpf(cpf);
+
+        public GuestDto GuestSearchByCpf(string cpf)
+        {
+            var booking = _serviceGuest.GuestSearchByCpf(cpf);
             var bookingDto = mapper.Map<GuestDto>(booking);
 
             return bookingDto;
         }
 
-        public void Update(BookingDto bookingDto)
+        public IEnumerable<BookingDto> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut)
         {
-            var booking = mapper.Map<Booking>(bookingDto);
-            _serviceBooking.Update(booking);
+            var booking = _serviceBooking.BookingSearchByDateRange(CheckIn, CheckOut);
+            var bookingDto = mapper.Map<IEnumerable<BookingDto>>(booking);
+
+            return bookingDto;
         }
     }
 }

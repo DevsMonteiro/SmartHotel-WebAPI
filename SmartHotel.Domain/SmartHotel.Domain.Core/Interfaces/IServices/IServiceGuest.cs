@@ -7,6 +7,6 @@ namespace SmartHotel.Domain.Interface.IServicies
     {
         IEnumerable<Guest> ChecktHasPending(IEnumerable<Guest> guests);
 
-        Guest GetGuestByCpf(string cpf);
+        Guest GuestSearchByCpf(string cpf);
     }
 }

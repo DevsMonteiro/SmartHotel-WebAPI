@@ -15,13 +15,11 @@ namespace SmartHotel.Data.Repositories
             this._context = _context;
         }
 
-        public Guest GetGuestByCpf(string cpf)
+        public Guest GuestSearchByCpf(string cpf)
         {
             IQueryable<Guest> guests = _context.Guest;
 
-            guests = guests.Where(guest => guest.CPF == cpf);
-
-            return guests.FirstOrDefault();
+            return guests.FirstOrDefault(guest => guest.CPF == cpf);
         }
     }
 }

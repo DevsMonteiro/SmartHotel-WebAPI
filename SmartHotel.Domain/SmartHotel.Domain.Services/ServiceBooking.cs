@@ -1,6 +1,9 @@
 ﻿using SmartHotel.Domain.Entities;
 using SmartHotel.Domain.Interface.IRepositories;
 using SmartHotel.Domain.Interface.IServicies;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SmartHotel.Domain.Servicies
 {
@@ -14,16 +17,16 @@ namespace SmartHotel.Domain.Servicies
             this._repositoryBooking = _repositoryBooking;
         }
 
-        public Booking GetGuestByCpf(string cpf)
+        public IEnumerable<Booking> ChekDateRoom(IEnumerable<Booking> bookings)
         {
-            return _repositoryBooking.GetGuestByCpf(cpf);
+            return bookings.Where(b => b.IsValid(b));
         }
 
-        //public IEnumerable<Booking> ChekDateRoom(IEnumerable<Booking> bookings)
-        //{
-        //    return bookings.Where(b => b.IsValid(b));
 
-        //    //throw new System.NotImplementedException();
-        //}
+        public IEnumerable<Booking> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut)
+        {
+            return _repositoryBooking.BookingSearchByDateRange(CheckIn, CheckOut);
+        }
+
     }
 }

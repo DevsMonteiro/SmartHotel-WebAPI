@@ -31,52 +31,11 @@ namespace SmartHotel.Domain.Entities
         public Guid RoomId { get; private set; }
         public Room Room { get; private set; }
 
-        //public bool IsValid(Booking booking)
-        //{
-        //    var toDay = DateTime.Today;
-        //    return booking.CheckIn >= toDay && booking.CheckOut > booking.CheckIn;
-        //}
+        public bool IsValid(Booking booking)
+        {
+            var toDay = DateTime.Today;
+            return booking.CheckIn >= toDay && booking.CheckOut > booking.CheckIn;
+        }
 
-        //public static readonly DateTime MinValue = new DateTime(1900, 1, 1);
-
-        //public Booking(DateTime checkIn, DateTime checkOut)
-        //{
-        //    if (!IsValidDate(checkIn))
-        //        throw new Exception("CheckInDate is invalid");
-
-        //    if (!IsValidDate(checkOut))
-        //        throw new Exception("CheckOutDate is invalid");
-
-        //    CheckIn = checkIn;
-        //    CheckOut = checkOut;
-        //}
-
-        //public static bool IsValid(DateTime checkIn, DateTime checkOut)
-        //{
-        //    return IsValidDate(checkIn) && IsValidDate(checkOut);
-        //}
-
-        //private static bool IsValidDate(DateTime date)
-        //{
-        //    return date > MinValue;
-        //}
-
-        //public override bool Equals(object obj)
-        //{
-        //    if (obj is not Booking date)
-        //        return false;
-
-        //    return CheckIn.Date.Equals(date.CheckIn.Date) && CheckOut.Date.Equals(date.CheckOut.Date);
-        //}
-
-        //public override int GetHashCode()
-        //{
-        //    return GetType().GetHashCode() * 907 + CheckIn.GetHashCode() + CheckOut.GetHashCode();
-        //}
-
-        //public override string ToString()
-        //{
-        //    return $"{CheckIn.Date} of {CheckOut.Date}";
-        //}
     }
 }

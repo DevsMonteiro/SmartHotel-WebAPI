@@ -4,6 +4,6 @@ namespace SmartHotel.Domain.Interface.IRepositories
 {
     public interface IRepositoryGuest : IRepositoryBase<Guest>
     {
-        Guest GetGuestByCpf(string cpf);
+        Guest GuestSearchByCpf(string cpf);
     }
 }
