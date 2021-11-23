@@ -16,7 +16,6 @@ namespace SmartHotel_WebAPI.Controllers
             this._applicationServiceGuest = applicationServiceGuest;
         }
 
-        // GET api/values
         [HttpGet]
         public ActionResult GetAll()
         {
@@ -26,14 +25,12 @@ namespace SmartHotel_WebAPI.Controllers
             return Ok(guest);
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> GetById(Guid id)
         {
             return Ok(_applicationServiceGuest.GetById(id));
         }
 
-        // POST api/values
         [HttpPost]
         public ActionResult Post(GuestDto guestDTO)
         {
@@ -43,7 +40,6 @@ namespace SmartHotel_WebAPI.Controllers
 
                 _applicationServiceGuest.Add(guestDTO);
                 return Ok(guestDTO);
-                //return Ok("Successfully Registered Guest!");
             }
             catch (Exception ex)
             {
@@ -52,7 +48,6 @@ namespace SmartHotel_WebAPI.Controllers
             }
         }
 
-        //PUT api/values/5
         [HttpPut]
         public ActionResult Put(GuestDto guestDTO)
         {
@@ -70,8 +65,7 @@ namespace SmartHotel_WebAPI.Controllers
             }
         }
 
-        // DELETE api/values/5
-        [HttpDelete()]
+        [HttpDelete]
         public ActionResult Delete(GuestDto guestDTO)
         {
             try

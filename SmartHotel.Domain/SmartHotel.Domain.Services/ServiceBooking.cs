@@ -22,11 +22,9 @@ namespace SmartHotel.Domain.Servicies
             return bookings.Where(b => b.IsValid(b));
         }
 
-
         public IEnumerable<Booking> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut)
         {
             return _repositoryBooking.BookingSearchByDateRange(CheckIn, CheckOut);
         }
-
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartHotel.Domain.Entities
 {
@@ -21,7 +20,6 @@ namespace SmartHotel.Domain.Entities
             PendencyId = pendencyId;
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; private set; }
 
         public string Name { get; private set; }

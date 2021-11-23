@@ -17,5 +17,6 @@ namespace SmartHotel.Application.Interface
         GuestDto GetById(Guid id);
 
         IEnumerable<GuestDto> ChecktHasPending();
+
     }
 }

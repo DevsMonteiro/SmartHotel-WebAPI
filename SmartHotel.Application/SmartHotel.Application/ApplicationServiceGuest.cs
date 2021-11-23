@@ -22,6 +22,11 @@ namespace SmartHotel.Application
 
         public void Add(GuestDto guestDto)
         {
+            if (guestDto.Id == null)
+            {
+                Console.WriteLine("passei aqui");
+            }
+
             var guest = mapper.Map<Guest>(guestDto);
             _serviceGuest.Add(guest);
         }

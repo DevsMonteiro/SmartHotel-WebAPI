@@ -8,4 +8,4 @@ namespace SmartHotel.Domain.Interface.IRepositories
     {
         IEnumerable<Booking> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut);
     }
-}
+} 
