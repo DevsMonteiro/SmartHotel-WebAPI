@@ -15,7 +15,7 @@ namespace SmartHotel.Application.Mapper
         private void GuestMap()
         {
             CreateMap<GuestDto, Guest>()
-                .ForMember(m => m.Id, opt => opt.Ignore())
+                .ForMember(m => m.Id, opt => opt.MapFrom(x=> x.Id.HasValue? x.Id.Value: Guid.NewGuid()))
                 .ForMember(m => m.Name, opt => opt.MapFrom(x => x.Name))
                 .ForMember(m => m.CPF, opt => opt.MapFrom(x => x.CPF))
                 .ForMember(m => m.Email, opt => opt.MapFrom(x => x.Email))

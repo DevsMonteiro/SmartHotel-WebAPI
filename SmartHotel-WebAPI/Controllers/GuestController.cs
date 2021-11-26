@@ -11,6 +11,7 @@ namespace SmartHotel_WebAPI.Controllers
     {
         private readonly IApplicationServiceGuest _applicationServiceGuest;
 
+
         public GuestController(IApplicationServiceGuest applicationServiceGuest)
         {
             this._applicationServiceGuest = applicationServiceGuest;
@@ -73,7 +74,22 @@ namespace SmartHotel_WebAPI.Controllers
                 if (guestDTO == null) return NotFound();
 
                 _applicationServiceGuest.Delete(guestDTO);
-                return Ok("Guest Successfully Removed!");
+                return Ok(guestDTO);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        [HttpDelete("delete/{Id}")]
+        public ActionResult DeleteById(Guid Id)
+        {
+            try
+            {
+                _applicationServiceGuest.DeleteById(Id);
+                return Ok();
             }
             catch (Exception ex)
             {

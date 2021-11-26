@@ -18,5 +18,6 @@ namespace SmartHotel.Application.Interface
 
         IEnumerable<GuestDto> ChecktHasPending();
 
+        void DeleteById(Guid id);
     }
 }

@@ -2,6 +2,7 @@
 using SmartHotel.Application.Dtos;
 using SmartHotel.Application.Interface;
 using SmartHotel.Domain.Entities;
+using SmartHotel.Domain.Interface.IRepositories;
 using SmartHotel.Domain.Interface.IServicies;
 using System;
 using System.Collections.Generic;
@@ -11,22 +12,20 @@ namespace SmartHotel.Application
     public class ApplicationServiceGuest : IApplicationServiceGuest
     {
         private readonly IServiceGuest _serviceGuest;
+        private readonly IRepositoryGuest _repositoryGuest;
         private readonly IMapper mapper;
 
         public ApplicationServiceGuest(IServiceGuest serviceGuest
+                                      , IRepositoryGuest repositoryGuest
                                       , IMapper mapper)
         {
             this._serviceGuest = serviceGuest;
+            this._repositoryGuest = repositoryGuest;
             this.mapper = mapper;
         }
 
         public void Add(GuestDto guestDto)
         {
-            if (guestDto.Id == null)
-            {
-                Console.WriteLine("passei aqui");
-            }
-
             var guest = mapper.Map<Guest>(guestDto);
             _serviceGuest.Add(guest);
         }
@@ -39,9 +38,6 @@ namespace SmartHotel.Application
 
         public IEnumerable<GuestDto> ChecktHasPending()
         {
-            //var guest = serviceGuest.GetGuestActive();
-            //var guestDto = mapper.Map<IEnumerable<GuestDto>>(guest);
-
             var guest = _serviceGuest.ChecktHasPending(_serviceGuest.GetAll());
             var guestDto = mapper.Map<IEnumerable<GuestDto>>(guest);
 
@@ -68,6 +64,12 @@ namespace SmartHotel.Application
         {
             var guest = mapper.Map<Guest>(guestDto);
             _serviceGuest.Update(guest);
+        }
+
+        public void DeleteById(Guid id)
+        {
+            var guest = _repositoryGuest.GetGuestById(id);
+            _repositoryGuest.Delete(guest);
         }
     }
 }

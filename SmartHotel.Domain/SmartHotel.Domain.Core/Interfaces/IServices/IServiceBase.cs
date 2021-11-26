@@ -14,5 +14,6 @@ namespace SmartHotel.Domain.Interface.IServicies
         IEnumerable<TEntity> GetAll();
 
         TEntity GetById(Guid id);
+
     }
 }

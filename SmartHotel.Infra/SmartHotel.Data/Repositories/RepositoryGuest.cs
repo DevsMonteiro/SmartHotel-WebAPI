@@ -1,6 +1,7 @@
 ﻿using SmartHotel.Data.Context;
 using SmartHotel.Domain.Entities;
 using SmartHotel.Domain.Interface.IRepositories;
+using System;
 using System.Linq;
 
 namespace SmartHotel.Data.Repositories
@@ -13,6 +14,13 @@ namespace SmartHotel.Data.Repositories
             : base(_context)
         {
             this._context = _context;
+        }
+
+        public Guest GetGuestById(Guid Id)
+        {
+            IQueryable<Guest> guests = _context.Guest;
+
+            return guests.FirstOrDefault(g => g.Id == Id);
         }
 
         public Guest GuestSearchByCpf(string cpf)
