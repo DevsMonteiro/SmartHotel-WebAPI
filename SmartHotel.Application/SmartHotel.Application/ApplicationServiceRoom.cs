@@ -35,6 +35,13 @@ namespace SmartHotel.Application
             serviceRoom.Remove(room);
         }
 
+        public void DeleteById(Guid id)
+        {
+            var guest = _repositoryRoom.GetRoomById(id);
+            _repositoryRoom.Delete(guest);
+
+        }
+
         public IEnumerable<RoomDto> GetAll()
         {
             var roomsDomain = _repositoryRoom.GetAll();
@@ -76,6 +83,15 @@ namespace SmartHotel.Application
             var roomDto = mapper.Map<RoomDto>(room);
 
             return roomDto;
+        }
+
+        public IEnumerable<RoomTypeDto> GetRoomType()
+        {
+            var roomsTypeDomain = _repositoryRoomType.GetAll();
+            var roomTypeDto = mapper.Map<IEnumerable<RoomTypeDto>>(roomsTypeDomain);
+
+            return roomTypeDto;
+
         }
 
         public void Update(RoomDto roomDto)

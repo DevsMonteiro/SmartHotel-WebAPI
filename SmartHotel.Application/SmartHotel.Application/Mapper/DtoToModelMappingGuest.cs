@@ -20,8 +20,7 @@ namespace SmartHotel.Application.Mapper
                 .ForMember(m => m.CPF, opt => opt.MapFrom(x => x.CPF))
                 .ForMember(m => m.Email, opt => opt.MapFrom(x => x.Email))
                 .ForMember(m => m.PhoneNumber, opt => opt.MapFrom(x => x.PhoneNumber))
-                .ForMember(m => m.RegistrationDate, opt => opt.Ignore())
-                .ForMember(m => m.PendencyId, opt => opt.Ignore());
+                .ForMember(m => m.RegistrationDate, opt => opt.Ignore());
         }
     }
 }

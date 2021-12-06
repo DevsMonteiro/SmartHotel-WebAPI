@@ -11,10 +11,10 @@ namespace SmartHotel.Domain.Servicies
     {
         private readonly IRepositoryBooking _repositoryBooking;
 
-        public ServiceBooking(IRepositoryBooking _repositoryBooking)
-            : base(_repositoryBooking)
+        public ServiceBooking(IRepositoryBooking repositoryBooking)
+            : base(repositoryBooking)
         {
-            this._repositoryBooking = _repositoryBooking;
+            this._repositoryBooking = repositoryBooking;
         }
 
         public IEnumerable<Booking> ChekDateRoom(IEnumerable<Booking> bookings)
@@ -23,8 +23,11 @@ namespace SmartHotel.Domain.Servicies
         }
 
         public IEnumerable<Booking> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut)
-        {
-            return _repositoryBooking.BookingSearchByDateRange(CheckIn, CheckOut);
+        {    
+          var bookingsReserved = _repositoryBooking.BookingSearchByDateRange(CheckIn, CheckOut);
+
+          return bookingsReserved;
         }
+
     }
 }

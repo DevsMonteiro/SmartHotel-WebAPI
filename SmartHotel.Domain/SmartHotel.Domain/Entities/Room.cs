@@ -16,7 +16,6 @@ namespace SmartHotel.Domain.Entities
             RoomTypeId = roomTypeId;
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; private set; }
 
         public string Number { get; private set; }

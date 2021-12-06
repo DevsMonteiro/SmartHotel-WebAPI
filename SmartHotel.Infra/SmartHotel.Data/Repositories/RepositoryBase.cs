@@ -23,9 +23,9 @@ namespace SmartHotel.Data.Repositories
                 _context.Set<TEntity>().Add(entity);
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -46,9 +46,9 @@ namespace SmartHotel.Data.Repositories
                 _context.Entry(entity).State = EntityState.Modified;
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -59,9 +59,9 @@ namespace SmartHotel.Data.Repositories
                 _context.Set<TEntity>().Remove(entity);
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
     }

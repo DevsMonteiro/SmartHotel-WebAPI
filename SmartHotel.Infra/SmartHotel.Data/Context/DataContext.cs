@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartHotel.Domain.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SmartHotel.Data.Context

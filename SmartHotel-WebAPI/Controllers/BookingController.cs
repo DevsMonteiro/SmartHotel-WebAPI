@@ -11,13 +11,15 @@ namespace SmartHotel_WebAPI.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IApplicationServiceBooking _applicationServiceBooking;
+        private object bookingTeste;
 
         public BookingController(IApplicationServiceBooking applicationServiceBooking)
         {
             this._applicationServiceBooking = applicationServiceBooking;
         }
 
-        #region HTTPGET
+        #region [GET]
+
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetAll()
         {
@@ -36,11 +38,26 @@ namespace SmartHotel_WebAPI.Controllers
             return Ok(_applicationServiceBooking.GuestSearchByCpf(cpf));
         }
 
+        [HttpGet("DdlRoom")]
+        public ActionResult<IEnumerable<string>> GetRoomByBooking(DateTime CheckIn, DateTime Checkout)
+        {
+            var roomAvailable = _applicationServiceBooking.GetDdlRoom(CheckIn, Checkout);
+            return Ok(roomAvailable);
+        }
+
         [HttpGet("ChekDate")]
         public ActionResult BookingSearchByDateRange(DateTime CheckIn, DateTime Checkout)
         {
-            return Ok(_applicationServiceBooking.BookingSearchByDateRange(CheckIn, Checkout));
+            bookingTeste = _applicationServiceBooking.BookingSearchByDateRange(CheckIn, Checkout);
+            return Ok(bookingTeste);
         }
+
+        [HttpGet("teste")]
+        public ActionResult returnByRoom()
+        {
+            return Ok(_applicationServiceBooking.RetornaQuartosDisponiveis());
+        }
+
         #endregion
 
         [HttpPost]
@@ -53,9 +70,25 @@ namespace SmartHotel_WebAPI.Controllers
                 _applicationServiceBooking.Add(bookingDto);
                 return Ok(bookingDto);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
+            }
+        }
+
+
+        [HttpDelete("delete/{id}")]
+        public ActionResult DeleteById(Guid id)
+        {
+            try
+            {
+                _applicationServiceBooking.DeleteById(id);
+
+                return Ok("Deleted");
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

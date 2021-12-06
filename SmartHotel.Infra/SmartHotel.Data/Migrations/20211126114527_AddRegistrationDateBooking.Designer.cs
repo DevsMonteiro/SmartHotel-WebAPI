@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartHotel.Data.Context;
 
 namespace SmartHotel.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211126114527_AddRegistrationDateBooking")]
+    partial class AddRegistrationDateBooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,6 +69,9 @@ namespace SmartHotel.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("varchar(100)");
 
+                    b.Property<Guid?>("PendencyId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("varchar(100)");
 
@@ -74,6 +79,8 @@ namespace SmartHotel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PendencyId");
 
                     b.ToTable("Guest");
                 });
@@ -84,15 +91,13 @@ namespace SmartHotel.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("GuestId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Value")
                         .HasColumnType("decimal(13,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GuestId");
 
                     b.ToTable("Pendency");
                 });
@@ -152,15 +157,13 @@ namespace SmartHotel.Data.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("SmartHotel.Domain.Entities.Pendency", b =>
+            modelBuilder.Entity("SmartHotel.Domain.Entities.Guest", b =>
                 {
-                    b.HasOne("SmartHotel.Domain.Entities.Guest", "Guest")
+                    b.HasOne("SmartHotel.Domain.Entities.Pendency", "Pendency")
                         .WithMany()
-                        .HasForeignKey("GuestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PendencyId");
 
-                    b.Navigation("Guest");
+                    b.Navigation("Pendency");
                 });
 
             modelBuilder.Entity("SmartHotel.Domain.Entities.Room", b =>

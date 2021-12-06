@@ -37,6 +37,9 @@ namespace SmartHotel.IoC
                 cfg.AddProfile(new DtoToModelMappingRoom());
                 cfg.AddProfile(new ModelToDtoMappingRoom());
 
+                cfg.AddProfile(new DtoToModelMappingRoomType());
+                cfg.AddProfile(new ModelToDtoMappingRoomType());
+
                 cfg.AddProfile(new DtoToModelMappingBooking());
                 cfg.AddProfile(new ModelToDtoMappingBooking());
             }));

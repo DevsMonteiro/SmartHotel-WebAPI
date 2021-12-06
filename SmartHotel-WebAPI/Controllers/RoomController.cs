@@ -16,7 +16,6 @@ namespace SmartHotel_WebAPI.Controllers
             this.applicationServiceRoom = applicationServiceRoom;
         }
 
-        // GET api/values
         [HttpGet]
         public IActionResult Get()
         {
@@ -24,31 +23,35 @@ namespace SmartHotel_WebAPI.Controllers
             return Ok(room);
         }
 
-        // GET api/
+        [HttpGet("TypeRoom")]
+        public IActionResult GetTypeRoom()
+        {
+            var roomType = applicationServiceRoom.GetRoomType();
+            return Ok(roomType);
+        }
+
         [HttpGet("{id}")]
         public ActionResult<string> Get(Guid id)
         {
             return Ok(applicationServiceRoom.GetById(id));
         }
 
-        // POST api/
         [HttpPost]
-        public ActionResult Post([FromBody] RoomDto roomDTO)
+        public ActionResult Post(RoomDto roomDTO)
         {
             try
             {
                 applicationServiceRoom.Add(roomDTO);
-                return Ok("Successfully Registered Room!");
+                return Ok(roomDTO);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
-        // PUT api/
         [HttpPut]
-        public ActionResult Put([FromBody] RoomDto roomDTO)
+        public ActionResult Put(RoomDto roomDTO)
         {
             try
             {
@@ -57,28 +60,25 @@ namespace SmartHotel_WebAPI.Controllers
                 applicationServiceRoom.Update(roomDTO);
                 return Ok("Room Updated Successfully!");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
-        // DELETE api/
-        [HttpDelete()]
-        public ActionResult Delete([FromBody] RoomDto roomDTO)
+        [HttpDelete("delete/{Id}")]
+        public ActionResult Delete(Guid id)
         {
             try
             {
-                if (roomDTO == null)
-                    return NotFound();
-
-                applicationServiceRoom.Delete(roomDTO);
-                return Ok("Room Successfully Removed!");
+                applicationServiceRoom.DeleteById(id);
+                return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
+
         }
     }
 }

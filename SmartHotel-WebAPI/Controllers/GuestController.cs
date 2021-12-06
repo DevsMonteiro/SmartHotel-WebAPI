@@ -11,7 +11,6 @@ namespace SmartHotel_WebAPI.Controllers
     {
         private readonly IApplicationServiceGuest _applicationServiceGuest;
 
-
         public GuestController(IApplicationServiceGuest applicationServiceGuest)
         {
             this._applicationServiceGuest = applicationServiceGuest;
@@ -20,9 +19,7 @@ namespace SmartHotel_WebAPI.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            //return Ok(applicationServiceGuest.GetAll());
-
-            var guest = _applicationServiceGuest.ChecktHasPending();
+            var guest = _applicationServiceGuest.GetAll();
             return Ok(guest);
         }
 
@@ -76,9 +73,9 @@ namespace SmartHotel_WebAPI.Controllers
                 _applicationServiceGuest.Delete(guestDTO);
                 return Ok(guestDTO);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -91,9 +88,9 @@ namespace SmartHotel_WebAPI.Controllers
                 _applicationServiceGuest.DeleteById(Id);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
     }

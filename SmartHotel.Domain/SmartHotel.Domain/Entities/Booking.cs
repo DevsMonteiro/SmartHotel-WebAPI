@@ -9,13 +9,14 @@ namespace SmartHotel.Domain.Entities
         {
         }
 
-        public Booking(Guid id, DateTime checkIn, DateTime checkOut, Guid guestId, Guid roomId, decimal value)
+        public Booking(Guid id, DateTime checkIn, DateTime checkOut, DateTime registrationDate, Guid guestId, Guid roomId, decimal value)
         {
             Id = id;
             GuestId = guestId;
             RoomId = roomId;
             CheckIn = checkIn;
             CheckOut = checkOut;
+            RegistrationDate = registrationDate;
             Value = value;
         }
 
@@ -25,6 +26,7 @@ namespace SmartHotel.Domain.Entities
         public decimal Value { get; private set; }
         public DateTime CheckIn { get; private set; }
         public DateTime CheckOut { get; private set; }
+        public DateTime RegistrationDate { get; private set; }
 
         public Guid GuestId { get; private set; }
         public Guest Guest { get; private set; }

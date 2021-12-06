@@ -5,17 +5,19 @@ namespace SmartHotel.Domain.Entities
 {
     public class Pendency
     {
-        public Pendency(Guid id, decimal value, bool active)
+        public Pendency(Guid id, decimal value, Guid guestId)
         {
             Id = id;
             Value = value;
-            Active = active;
+            GuestId = guestId;
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; private set; }
 
         public decimal Value { get; private set; }
-        public bool Active { get; private set; }
+
+        public Guid GuestId { get; private set; }
+
+        public Guest Guest { get; private set; }
     }
 }

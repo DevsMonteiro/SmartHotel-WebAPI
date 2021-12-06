@@ -16,10 +16,6 @@ namespace SmartHotel.Domain.Servicies
             this._repositoryGuest = repositoryGuest;
         }
 
-        public IEnumerable<Guest> ChecktHasPending(IEnumerable<Guest> guests)
-        {
-            return guests.Where(g => g.HasPending(g));
-        }
 
         public Guest GuestSearchByCpf(string cpf)
         {

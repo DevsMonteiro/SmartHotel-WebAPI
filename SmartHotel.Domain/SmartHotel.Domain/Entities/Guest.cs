@@ -9,7 +9,7 @@ namespace SmartHotel.Domain.Entities
         {
         }
 
-        public Guest(Guid id, string name, string cpf, string email, string phoneNumber, DateTime registrationDate, Guid? pendencyId)
+        public Guest(Guid id, string name, string cpf, string email, string phoneNumber, DateTime registrationDate)
         {
             Id = id;
             Name = name;
@@ -17,7 +17,6 @@ namespace SmartHotel.Domain.Entities
             Email = email;
             PhoneNumber = phoneNumber;
             RegistrationDate = registrationDate;
-            PendencyId = pendencyId;
         }
 
         public Guid Id { get; private set; }
@@ -27,13 +26,7 @@ namespace SmartHotel.Domain.Entities
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
         public DateTime RegistrationDate { get; private set; }
-        public Guid? PendencyId { get; private set; }
-        public Pendency Pendency { get; private set; }
         public virtual IEnumerable<Booking> Bookings { get; private set; }
 
-        public bool HasPending(Guest guest)
-        {
-            return guest.PendencyId == null;
-        }
     }
 }

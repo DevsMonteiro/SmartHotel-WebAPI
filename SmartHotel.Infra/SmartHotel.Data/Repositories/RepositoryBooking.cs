@@ -23,8 +23,7 @@ namespace SmartHotel.Data.Repositories
             return _context.Set<Booking>()
                            .Include(g => g.Guest)
                            .Include(r => r.Room)
-                           .ThenInclude(rt => rt.RoomType)
-                           .ToList();
+                           .ThenInclude(rt => rt.RoomType);
         }
 
         public IEnumerable<Booking> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut)
@@ -32,12 +31,21 @@ namespace SmartHotel.Data.Repositories
             CheckIn = CheckIn.Date;
             CheckOut = CheckOut.Date.AddDays(1).AddSeconds(-1);
 
-            return _context.Booking
-                .Where(d => d.CheckIn >= CheckIn && d.CheckOut <= CheckOut)
+            return _context.Set<Booking>()
+                .Where(d => (d.CheckIn >= CheckIn && d.CheckIn <= CheckOut)   ||
+                            (d.CheckOut >= CheckIn && d.CheckOut <= CheckOut) ||
+                            (CheckIn >= d.CheckIn && CheckIn <= d.CheckOut)   ||
+                            (CheckOut >= d.CheckIn && CheckOut <= d.CheckOut))
                 .Include(g => g.Guest)
                 .Include(r => r.Room)
-                .ThenInclude(rt => rt.RoomType)
-                .ToList();
+                .ThenInclude(rt => rt.RoomType);
+        }
+
+        public Booking GetBookingById(Guid id)
+        {
+            IQueryable<Booking> bookings = _context.Booking;
+
+            return bookings.FirstOrDefault(g => g.Id == id);
         }
     }
 }

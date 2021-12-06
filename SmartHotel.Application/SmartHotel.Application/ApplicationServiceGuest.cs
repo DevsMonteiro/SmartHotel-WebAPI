@@ -16,8 +16,8 @@ namespace SmartHotel.Application
         private readonly IMapper mapper;
 
         public ApplicationServiceGuest(IServiceGuest serviceGuest
-                                      , IRepositoryGuest repositoryGuest
-                                      , IMapper mapper)
+                                      ,IRepositoryGuest repositoryGuest
+                                      ,IMapper mapper)
         {
             this._serviceGuest = serviceGuest;
             this._repositoryGuest = repositoryGuest;
@@ -36,13 +36,6 @@ namespace SmartHotel.Application
             _serviceGuest.Remove(guest);
         }
 
-        public IEnumerable<GuestDto> ChecktHasPending()
-        {
-            var guest = _serviceGuest.ChecktHasPending(_serviceGuest.GetAll());
-            var guestDto = mapper.Map<IEnumerable<GuestDto>>(guest);
-
-            return guestDto;
-        }
 
         public IEnumerable<GuestDto> GetAll()
         {
