@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartHotel.Application.Dtos;
 using SmartHotel.Application.Interface;
+using SmartHotel.Query.Application.Interface;
 using System;
 
 namespace SmartHotel_WebAPI.Controllers
@@ -9,31 +10,36 @@ namespace SmartHotel_WebAPI.Controllers
     [ApiController]
     public class RoomController : ControllerBase
     {
-        private readonly IApplicationServiceRoom applicationServiceRoom;
+        private readonly IApplicationServiceRoom _applicationServiceRoom;
+        private readonly IApplicationServiceQueryRoom _applicationServiceQueryRoom;
 
-        public RoomController(IApplicationServiceRoom applicationServiceRoom)
+        public RoomController(IApplicationServiceRoom applicationServiceRoom,
+                              IApplicationServiceQueryRoom applicationServiceQueryRoom)
         {
-            this.applicationServiceRoom = applicationServiceRoom;
+           _applicationServiceRoom = applicationServiceRoom;
+           _applicationServiceQueryRoom = applicationServiceQueryRoom;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            var room = applicationServiceRoom.GetAll();
+            var room = _applicationServiceQueryRoom.GetAll();
             return Ok(room);
+
         }
 
         [HttpGet("TypeRoom")]
         public IActionResult GetTypeRoom()
         {
-            var roomType = applicationServiceRoom.GetRoomType();
+            var roomType = _applicationServiceQueryRoom.GetRoomType();
             return Ok(roomType);
         }
 
         [HttpGet("{id}")]
         public ActionResult<string> Get(Guid id)
         {
-            return Ok(applicationServiceRoom.GetById(id));
+            //return Ok(applicationServiceRoom.GetById(id));
+            throw new IndexOutOfRangeException();
         }
 
         [HttpPost]
@@ -41,7 +47,7 @@ namespace SmartHotel_WebAPI.Controllers
         {
             try
             {
-                applicationServiceRoom.Add(roomDTO);
+                _applicationServiceRoom.Add(roomDTO);
                 return Ok(roomDTO);
             }
             catch (Exception)
@@ -57,7 +63,7 @@ namespace SmartHotel_WebAPI.Controllers
             {
                 if (roomDTO == null) return NotFound();
 
-                applicationServiceRoom.Update(roomDTO);
+                _applicationServiceRoom.Update(roomDTO);
                 return Ok("Room Updated Successfully!");
             }
             catch (Exception)
@@ -71,7 +77,7 @@ namespace SmartHotel_WebAPI.Controllers
         {
             try
             {
-                applicationServiceRoom.DeleteById(id);
+                _applicationServiceRoom.DeleteById(id);
                 return Ok();
             }
             catch (Exception)

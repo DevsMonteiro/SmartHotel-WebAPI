@@ -18,6 +18,5 @@ namespace SmartHotel.Domain.Entities
 
         public Guid GuestId { get; private set; }
 
-        public Guest Guest { get; private set; }
     }
 }

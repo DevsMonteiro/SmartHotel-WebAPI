@@ -46,60 +46,10 @@ namespace SmartHotel.Application
             _serviceBooking.Remove(booking);
         }
 
-        public IEnumerable<BookingDto> GetAll()
-        {
-            var bookingDomain = _repositoryBooking.GetAll();
-            var bookingDto = mapper.Map<IEnumerable<BookingDto>>(bookingDomain);
-
-            return bookingDto;
-        }
-
-        public BookingDto GetById(Guid id)
-        {
-            var booking = _serviceBooking.GetById(id);
-            var bookingDto = mapper.Map<BookingDto>(booking);
-
-            return bookingDto;
-        }
-
         public void Update(BookingDto bookingDto)
         {
             var booking = mapper.Map<Booking>(bookingDto);
             _serviceBooking.Update(booking);
-        }
-
-
-        public GuestDto GuestSearchByCpf(string cpf)
-        {
-            var booking = _serviceGuest.GuestSearchByCpf(cpf);
-            var bookingDto = mapper.Map<GuestDto>(booking);
-
-            return bookingDto;
-        }
-
-        public IEnumerable<RoomDto> GetDdlRoom(DateTime CheckIn, DateTime CheckOut)
-        {   
-            var bookingRoom = _serviceRoom.GetRoomAvailable(CheckIn, CheckOut);
-            var roomDto = mapper.Map<IEnumerable<RoomDto>>(bookingRoom);
-
-            return roomDto;
-        }
-
-        public IEnumerable<BookingDto> BookingSearchByDateRange(DateTime CheckIn, DateTime CheckOut)
-        {
-            var booking = _serviceBooking.BookingSearchByDateRange(CheckIn, CheckOut);
-            var bookingDto = mapper.Map<IEnumerable<BookingDto>>(booking);
-
-            return bookingDto;
-        }
-
-        public IEnumerable<RoomDto> RetornaQuartosDisponiveis()
-        {
-
-            //var quartosDisponiveis = _serviceRoom.QuartosDisponieveis();
-
-            //return (IEnumerable<RoomDto>)quartosDisponiveis;
-            throw new NotImplementedException();
         }
 
         public void DeleteById(Guid id)

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SmartHotel.Domain\SmartHotel.Domain.Core\SmartHotel.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\SmartHotel.Query.Domain\SmartHotel.Query.Domain.Core\SmartHotel.Query.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

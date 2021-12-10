@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SmartHotel.Query.Application\SmartHotel.Query.Application\SmartHotel.Query.Application.csproj" />
+    <ProjectReference Include="..\..\SmartHotel.Query.Domain\SmartHotel.Query.Domain.Services\SmartHotel.Query.Domain.Services.csproj" />
+    <ProjectReference Include="..\SmartHotel.Query.Data\SmartHotel.Query.Data.csproj" />
+  </ItemGroup>
+
+</Project>

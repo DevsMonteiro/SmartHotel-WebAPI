@@ -12,12 +12,6 @@ namespace SmartHotel.Application.Interface
 
         void Delete(RoomDto roomDto);
 
-        IEnumerable<RoomDto> GetAll();
-
-        RoomDto GetById(Guid id);
-
-        IEnumerable<RoomTypeDto> GetRoomType();
-
         void DeleteById(Guid id);
     }
 }

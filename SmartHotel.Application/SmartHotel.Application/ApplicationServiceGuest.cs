@@ -5,7 +5,6 @@ using SmartHotel.Domain.Entities;
 using SmartHotel.Domain.Interface.IRepositories;
 using SmartHotel.Domain.Interface.IServicies;
 using System;
-using System.Collections.Generic;
 
 namespace SmartHotel.Application
 {
@@ -13,49 +12,32 @@ namespace SmartHotel.Application
     {
         private readonly IServiceGuest _serviceGuest;
         private readonly IRepositoryGuest _repositoryGuest;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
         public ApplicationServiceGuest(IServiceGuest serviceGuest
                                       ,IRepositoryGuest repositoryGuest
                                       ,IMapper mapper)
         {
-            this._serviceGuest = serviceGuest;
-            this._repositoryGuest = repositoryGuest;
-            this.mapper = mapper;
+            _serviceGuest = serviceGuest;
+            _repositoryGuest = repositoryGuest;
+            _mapper = mapper;
         }
 
         public void Add(GuestDto guestDto)
         {
-            var guest = mapper.Map<Guest>(guestDto);
+            var guest = _mapper.Map<Guest>(guestDto);
             _serviceGuest.Add(guest);
         }
 
         public void Delete(GuestDto guestDto)
         {
-            var guest = mapper.Map<Guest>(guestDto);
+            var guest = _mapper.Map<Guest>(guestDto);
             _serviceGuest.Remove(guest);
-        }
-
-
-        public IEnumerable<GuestDto> GetAll()
-        {
-            var guest = _serviceGuest.GetAll();
-            var guestDto = mapper.Map<IEnumerable<GuestDto>>(guest);
-
-            return guestDto;
-        }
-
-        public GuestDto GetById(Guid id)
-        {
-            var guest = _serviceGuest.GetById(id);
-            var guestDto = mapper.Map<GuestDto>(guest);
-
-            return guestDto;
         }
 
         public void Update(GuestDto guestDto)
         {
-            var guest = mapper.Map<Guest>(guestDto);
+            var guest = _mapper.Map<Guest>(guestDto);
             _serviceGuest.Update(guest);
         }
 

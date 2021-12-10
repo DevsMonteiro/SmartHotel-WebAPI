@@ -29,23 +29,6 @@ namespace SmartHotel.IoC
             builder.RegisterType<RepositoryRoomType>().As<IRepositoryRoomType>();
             builder.RegisterType<RepositoryBooking>().As<IRepositoryBooking>();
 
-            builder.Register(ctx => new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new DtoToModelMappingGuest());
-                cfg.AddProfile(new ModelToDtoMappingGuest());
-
-                cfg.AddProfile(new DtoToModelMappingRoom());
-                cfg.AddProfile(new ModelToDtoMappingRoom());
-
-                cfg.AddProfile(new DtoToModelMappingRoomType());
-                cfg.AddProfile(new ModelToDtoMappingRoomType());
-
-                cfg.AddProfile(new DtoToModelMappingBooking());
-                cfg.AddProfile(new ModelToDtoMappingBooking());
-            }));
-
-            builder.Register(ctx => ctx.Resolve<MapperConfiguration>().CreateMapper()).As<IMapper>().InstancePerLifetimeScope();
-
             #endregion IoC
         }
     }

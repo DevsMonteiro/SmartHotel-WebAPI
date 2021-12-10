@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartHotel.Application.Dtos;
 using SmartHotel.Application.Interface;
+using SmartHotel.Query.Application.Interface;
 using System;
 using System.Collections.Generic;
 
@@ -11,55 +12,69 @@ namespace SmartHotel_WebAPI.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IApplicationServiceBooking _applicationServiceBooking;
-        private object bookingTeste;
+        private readonly IApplicationServiceQueryBooking _applicationServiceQueryBooking;
 
-        public BookingController(IApplicationServiceBooking applicationServiceBooking)
+        //private object bookingTeste;
+
+        public BookingController(IApplicationServiceBooking applicationServiceBooking
+                                , IApplicationServiceQueryBooking applicationServiceQueryBooking)
         {
-            this._applicationServiceBooking = applicationServiceBooking;
+            _applicationServiceBooking = applicationServiceBooking;
+            _applicationServiceQueryBooking = applicationServiceQueryBooking;
         }
 
-        #region [GET]
+        #region [QWERY]
 
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetAll()
         {
-            return Ok(_applicationServiceBooking.GetAll());
+            var bookings = _applicationServiceQueryBooking.GetAll();
+
+            return Ok(bookings);
+
         }
 
         [HttpGet("{id}")]
         public ActionResult GetById(Guid id)
         {
-            return Ok(_applicationServiceBooking.GetById(id));
+            //return Ok(_applicationServiceBooking.GetById(id));
+            throw new IndexOutOfRangeException();
         }
 
         [HttpGet("GetByCpf/{cpf}")]
         public ActionResult GuestSearchByCpf(string cpf)
         {
-            return Ok(_applicationServiceBooking.GuestSearchByCpf(cpf));
+            var bookings = _applicationServiceQueryBooking.GuestSearchByCpf(cpf);
+
+            return Ok(bookings);
+
         }
 
         [HttpGet("DdlRoom")]
-        public ActionResult<IEnumerable<string>> GetRoomByBooking(DateTime CheckIn, DateTime Checkout)
+        public ActionResult<IEnumerable<string>> GetRoomByBooking(DateTime CheckIn, DateTime Checkout, Guid id)
         {
-            var roomAvailable = _applicationServiceBooking.GetDdlRoom(CheckIn, Checkout);
+            var roomAvailable = _applicationServiceQueryBooking.GetDdlRoom(CheckIn, Checkout, id);
             return Ok(roomAvailable);
+        }
+
+        [HttpGet("ValueRoom")]
+        public ActionResult GetCalcValueRoom(DateTime CheckIn, DateTime Checkout, Guid id)
+        {
+            var calcValueRoom = _applicationServiceQueryBooking.GetCalcValueRoom(CheckIn, Checkout, id);
+            return Ok(calcValueRoom);
         }
 
         [HttpGet("ChekDate")]
         public ActionResult BookingSearchByDateRange(DateTime CheckIn, DateTime Checkout)
         {
-            bookingTeste = _applicationServiceBooking.BookingSearchByDateRange(CheckIn, Checkout);
-            return Ok(bookingTeste);
-        }
-
-        [HttpGet("teste")]
-        public ActionResult returnByRoom()
-        {
-            return Ok(_applicationServiceBooking.RetornaQuartosDisponiveis());
+            //bookingTeste = _applicationServiceBooking.BookingSearchByDateRange(CheckIn, Checkout);
+            //return Ok(bookingTeste);
+            throw new IndexOutOfRangeException();
         }
 
         #endregion
 
+        #region [COMMAND]
         [HttpPost]
         public ActionResult Post(BookingDto bookingDto)
         {
@@ -76,7 +91,6 @@ namespace SmartHotel_WebAPI.Controllers
             }
         }
 
-
         [HttpDelete("delete/{id}")]
         public ActionResult DeleteById(Guid id)
         {
@@ -91,5 +105,9 @@ namespace SmartHotel_WebAPI.Controllers
                 throw;
             }
         }
+
+        #endregion
+
+
     }
 }
