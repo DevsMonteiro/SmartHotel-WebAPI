@@ -5,6 +5,10 @@ namespace SmartHotel.Query.Domain.Entities
 {
     public class Pendency
     {
+        public Pendency()
+        {
+        }
+
         public Pendency(Guid id, decimal value, Guid guestId)
         {
             Id = id;
@@ -12,12 +16,12 @@ namespace SmartHotel.Query.Domain.Entities
             GuestId = guestId;
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public decimal Value { get; private set; }
+        public decimal Value { get; set; }
 
-        public Guid GuestId { get; private set; }
+        public Guid GuestId { get; set; }
 
-        public Guest Guest { get; private set; }
+        public Guest Guest { get; set; }
     }
 }

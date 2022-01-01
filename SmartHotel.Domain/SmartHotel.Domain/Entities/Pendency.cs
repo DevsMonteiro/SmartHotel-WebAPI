@@ -12,11 +12,11 @@ namespace SmartHotel.Domain.Entities
             GuestId = guestId;
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public decimal Value { get; private set; }
+        public decimal Value { get; set; }
 
-        public Guid GuestId { get; private set; }
+        public Guid GuestId { get; set; }
 
     }
 }

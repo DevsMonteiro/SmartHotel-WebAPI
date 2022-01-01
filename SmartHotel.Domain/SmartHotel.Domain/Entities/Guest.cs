@@ -19,14 +19,14 @@ namespace SmartHotel.Domain.Entities
             RegistrationDate = registrationDate;
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public string Name { get; private set; }
-        public string CPF { get; private set; }
-        public string Email { get; private set; }
-        public string PhoneNumber { get; private set; }
-        public DateTime RegistrationDate { get; private set; }
-        public virtual IEnumerable<Booking> Bookings { get; private set; }
+        public string Name { get; set; }
+        public string CPF { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime RegistrationDate { get; set; }
+        public virtual IEnumerable<Booking> Bookings { get; set; }
 
     }
 }

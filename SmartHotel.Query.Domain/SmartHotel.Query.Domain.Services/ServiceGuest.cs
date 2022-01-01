@@ -5,7 +5,7 @@ using SmartHotel.Query.Domain.Services;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SmartHotel.Domain.Servicies
+namespace SmartHotel.Query.Domain.Servicies
 {
     public class ServiceGuest : ServiceBase<Guest>, IQueryServiceGuest
     {

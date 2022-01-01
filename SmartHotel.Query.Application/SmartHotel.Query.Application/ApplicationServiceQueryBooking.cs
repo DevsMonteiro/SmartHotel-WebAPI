@@ -14,10 +14,12 @@ namespace SmartHotel.Query.Application
         private readonly IRepositoryBooking _repositoryBooking;
         private readonly IRepositoryRoom _repositoryRoom;
         private readonly IRepositoryRoomType _repositoryRoomType;
+        private readonly IRepositoryGuest _repositoryGuest;
 
         private readonly IQueryServiceBooking _serviceBooking;
         private readonly IQueryServiceGuest _serviceGuest;
         private readonly IQueryServiceRoom _serviceRoom;
+        private readonly IRepositoryPendency _repositoryPendency;
 
 
         private readonly IMapper _mapper;
@@ -26,14 +28,18 @@ namespace SmartHotel.Query.Application
                                              ,IRepositoryBooking repositoryBooking
                                              ,IRepositoryRoom repositoryRoom
                                              ,IRepositoryRoomType repositoryRoomType
+                                             ,IRepositoryGuest repositoryGuest
                                              ,IQueryServiceGuest serviceGuest
                                              ,IQueryServiceRoom serviceRoom
+                                             ,IRepositoryPendency repositoryPendency
                                              ,IMapper mapper)
         {
 
             _repositoryBooking = repositoryBooking;
             _repositoryRoom = repositoryRoom;
             _repositoryRoomType = repositoryRoomType;
+            _repositoryGuest = repositoryGuest;
+            _repositoryPendency = repositoryPendency;
             _serviceBooking = serviceBooking;
             _serviceGuest = serviceGuest;
             _serviceRoom = serviceRoom;
@@ -58,10 +64,22 @@ namespace SmartHotel.Query.Application
 
         public QueryGuestDto GuestSearchByCpf(string cpf)
         {
-            var booking = _serviceGuest.GuestSearchByCpf(cpf);
-            var bookingDto = _mapper.Map<QueryGuestDto>(booking);
 
-            return bookingDto;
+            var checkPendecy = _repositoryPendency.CheckGuestPending(cpf);
+
+            if (checkPendecy == null)
+            {
+                var booking = _serviceGuest.GuestSearchByCpf(cpf);
+                var bookingDto = _mapper.Map<QueryGuestDto>(booking);
+
+                return bookingDto;
+            }
+            else
+            {
+                throw new InvalidOperationException("Pendency");
+            }
+
+
         }
 
         public IEnumerable<QueryRoomDto> GetDdlRoom(DateTime CheckIn, DateTime CheckOut, Guid id)
@@ -87,6 +105,5 @@ namespace SmartHotel.Query.Application
 
             return roomTypeDto;
         }
-
     }
 }

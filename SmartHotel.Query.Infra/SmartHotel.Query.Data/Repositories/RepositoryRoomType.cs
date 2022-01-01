@@ -27,10 +27,10 @@ namespace SmartHotel.Query.Data.Repositories
             var days = (CheckOut - CheckIn).Days;
 
             var roomsType = _context.RoomType
-                                              .Select(t => new RoomType {Id = t.Id
-                                                                        ,Name = t.Name
-                                                                        ,Value = ((decimal)(float)(t.Value * days))})
-                                              .FirstOrDefault(r => r.Id == id); 
+                            .Select(t => new RoomType {Id = t.Id
+                                                    ,Name = t.Name
+                                                    ,Value = ((decimal)(float)(t.Value * days))})
+                            .FirstOrDefault(r => r.Id == id); 
 
             return roomsType;
         }

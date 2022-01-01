@@ -44,10 +44,17 @@ namespace SmartHotel_WebAPI.Controllers
         [HttpGet("GetByCpf/{cpf}")]
         public ActionResult GuestSearchByCpf(string cpf)
         {
-            var bookings = _applicationServiceQueryBooking.GuestSearchByCpf(cpf);
+            try
+            {
+                var bookings = _applicationServiceQueryBooking.GuestSearchByCpf(cpf);
 
-            return Ok(bookings);
+                return Ok(bookings);
+            }
+            catch (Exception ex)
+            {
 
+                return BadRequest($"Erro: {ex.Message}");
+            }
         }
 
         [HttpGet("DdlRoom")]
@@ -67,8 +74,7 @@ namespace SmartHotel_WebAPI.Controllers
         [HttpGet("ChekDate")]
         public ActionResult BookingSearchByDateRange(DateTime CheckIn, DateTime Checkout)
         {
-            //bookingTeste = _applicationServiceBooking.BookingSearchByDateRange(CheckIn, Checkout);
-            //return Ok(bookingTeste);
+
             throw new IndexOutOfRangeException();
         }
 
@@ -82,12 +88,29 @@ namespace SmartHotel_WebAPI.Controllers
             {
                 if (bookingDto == null) return NotFound();
 
+
                 _applicationServiceBooking.Add(bookingDto);
                 return Ok(bookingDto);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
+        [HttpPut]
+        public ActionResult Put(BookingDto bookingDto)
+        {
+            try
+            {
+                if (bookingDto == null) return NotFound();
+
+                _applicationServiceBooking.Update(bookingDto);
+                return Ok(bookingDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
             }
         }
 
@@ -107,7 +130,6 @@ namespace SmartHotel_WebAPI.Controllers
         }
 
         #endregion
-
 
     }
 }

@@ -16,10 +16,10 @@ namespace SmartHotel.Domain.Entities
             RoomTypeId = roomTypeId;
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public string Number { get; private set; }
-        public Guid RoomTypeId { get; private set; }
-        public RoomType RoomType { get; private set; }
+        public string Number { get; set; }
+        public Guid RoomTypeId { get; set; }
+        public RoomType RoomType { get; set; }
     }
 }

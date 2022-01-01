@@ -15,6 +15,5 @@ namespace SmartHotel.Domain.Interface.IRepositories
 
         IEnumerable<Room> GetRoomAvailable(DateTime CheckIn, DateTime CheckOut);
 
-
     }
 }

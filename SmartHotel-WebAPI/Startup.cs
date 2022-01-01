@@ -59,6 +59,9 @@ namespace SmartHotel_WebAPI
                 cfg.AddProfile(new SmartHotel.Application.Mapper.DtoToModelMappingRoomType());
                 cfg.AddProfile(new SmartHotel.Application.Mapper.ModelToDtoMappingRoomType());
 
+                cfg.AddProfile(new SmartHotel.Application.Mapper.DtoToModelMappingPendency());
+                cfg.AddProfile(new SmartHotel.Application.Mapper.ModelToDtoMappingPendency());
+
                 cfg.AddProfile(new SmartHotel.Application.Mapper.DtoToModelMappingBooking());
                 cfg.AddProfile(new SmartHotel.Application.Mapper.ModelToDtoMappingBooking());
 

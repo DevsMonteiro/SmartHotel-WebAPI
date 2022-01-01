@@ -21,17 +21,21 @@ namespace SmartHotel.Domain.Entities
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public decimal Value { get; private set; }
-        public DateTime CheckIn { get; private set; }
-        public DateTime CheckOut { get; private set; }
-        public DateTime RegistrationDate { get; private set; }
+        public decimal Value { get; set; }
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
+        public DateTime RegistrationDate { get; set; }
 
-        public Guid GuestId { get; private set; }
-        public Guest Guest { get; private set; }
-        public Guid RoomId { get; private set; }
-        public Room Room { get; private set; }
+        public Guid GuestId { get; set; }
+        public Guest Guest { get; set; }
+        public Guid RoomId { get; set; }
+        public Room Room { get; set; }
+
+
+
+
 
         public bool IsValid(Booking booking)
         {

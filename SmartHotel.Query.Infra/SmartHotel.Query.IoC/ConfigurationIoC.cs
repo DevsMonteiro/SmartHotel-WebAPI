@@ -20,15 +20,18 @@ namespace SmartHotel.Query.IoC
             builder.RegisterType<ApplicationServiceQueryGuest>().As<IApplicationServiceQueryGuest>();
             builder.RegisterType<ApplicationServiceQueryRoom>().As<IApplicationServiceQueryRoom>();
             builder.RegisterType<ApplicationServiceQueryBooking>().As<IApplicationServiceQueryBooking>();
+            builder.RegisterType<ApplicationServiceQueryPendency>().As<IApplicationServiceQueryPendency>();
 
             builder.RegisterType<ServiceGuest>().As<IQueryServiceGuest>();
             builder.RegisterType<ServiceRoom>().As<IQueryServiceRoom>();
             builder.RegisterType<ServiceBooking>().As<IQueryServiceBooking>();
+            builder.RegisterType<ServicePendency>().As<IQueryServicePendency>();
 
             builder.RegisterType<RepositoryGuest>().As<IRepositoryGuest>();
             builder.RegisterType<RepositoryRoom>().As<IRepositoryRoom>();
             builder.RegisterType<RepositoryRoomType>().As<IRepositoryRoomType>();
             builder.RegisterType<RepositoryBooking>().As<IRepositoryBooking>();
+            builder.RegisterType<RepositoryPendency>().As<IRepositoryPendency>();
 
             #endregion IoC
         }

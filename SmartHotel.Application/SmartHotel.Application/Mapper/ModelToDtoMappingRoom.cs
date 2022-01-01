@@ -19,5 +19,6 @@ namespace SmartHotel.Application.Mapper
                 .ForMember(m => m.RoomTypeId, opt => opt.MapFrom(x => x.RoomTypeId))
                 .ForMember(m => m.RoomTypeName, opt => opt.MapFrom(x => x.RoomType.Name));
         }
+
     }
 }

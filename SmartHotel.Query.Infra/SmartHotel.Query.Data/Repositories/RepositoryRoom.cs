@@ -62,8 +62,8 @@ namespace SmartHotel.Query.Data.Repositories
 
         public IEnumerable<Room> GetRoomAvailable(DateTime CheckIn, DateTime CheckOut, Guid id)
         {
-            CheckIn = CheckIn.Date;
-            CheckOut = CheckOut.Date.AddDays(1).AddSeconds(-1);
+            CheckIn = CheckIn.Date.AddHours(12);
+            CheckOut = CheckOut.Date.AddHours(12).AddSeconds(-1);
 
             var bookingsId = (from b in _context.Booking
                               where (b.CheckIn >= CheckIn && b.CheckIn <= CheckOut) ||

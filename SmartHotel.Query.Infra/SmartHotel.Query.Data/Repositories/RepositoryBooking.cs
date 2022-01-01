@@ -48,5 +48,7 @@ namespace SmartHotel.Query.Data.Repositories
 
             return bookings.FirstOrDefault(g => g.Id == id);
         }
+
+        public IQueryable<Booking> Query => _context.Set<Booking>();
     }
 }

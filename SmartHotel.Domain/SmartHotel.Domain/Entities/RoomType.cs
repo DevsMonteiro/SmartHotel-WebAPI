@@ -17,9 +17,9 @@ namespace SmartHotel.Domain.Entities
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public string Name { get; private set; }
-        public decimal Value { get; private set; }
+        public string Name { get; set; }
+        public decimal Value { get; set; }
     }
 }

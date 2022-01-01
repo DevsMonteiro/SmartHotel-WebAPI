@@ -1,4 +1,5 @@
-﻿using SmartHotel.Query.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartHotel.Query.Data.Context;
 using SmartHotel.Query.Domain.Entities;
 using SmartHotel.Query.Domain.Interface.IRepositories;
 using System;
@@ -29,5 +30,7 @@ namespace SmartHotel.Query.Data.Repositories
 
             return guests.FirstOrDefault(guest => guest.CPF == cpf);
         }
+
+        public IQueryable<Guest> Query => _context.Set<Guest>();
     }
 }

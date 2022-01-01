@@ -13,5 +13,6 @@ namespace SmartHotel.Application.Interface
         void Delete(BookingDto bookingDto);
 
         void DeleteById(Guid id);
+
     }
 }
